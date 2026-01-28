@@ -1,0 +1,233 @@
+:root{
+  --bg:#1f2937;
+  --panel:#111827;
+  --button:#e5e7eb;
+  --accent:#f59e0b;
+  --muted:#9ca3af;
+  --shadow: 0 6px 18px rgba(2,6,23,0.6);
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:linear-gradient(180deg,var(--bg),#0b1220);
+  padding:24px;
+  color:var(--button);
+}
+
+/* Calculator container */
+.calculator{
+  width:720px;
+  max-width:100%;
+  background:linear-gradient(180deg,var(--panel),#0b1220);
+  border-radius:12px;
+  padding:18px;
+  box-shadow:var(--shadow);
+}
+
+/* top row: display + history */
+.top-row{
+  display:flex;
+  gap:12px;
+  margin-bottom:12px;
+  align-items:flex-start;
+}
+
+/* display */
+.display{
+  flex:1 1 320px;
+  height:56px;
+  border-radius:8px;
+  border:0;
+  padding:12px;
+  font-size:1.4rem;
+  text-align:right;
+  background:#0b1220;
+  color:var(--button);
+  outline: none;
+  box-shadow: inset 0 -2px 6px rgba(0,0,0,0.6);
+}
+
+/* flash / error state for brief feedback */
+.display.flash{
+  background: linear-gradient(180deg,#3b2b2b,#2a1f1f);
+  color: #ffecec;
+  transition: background .12s ease;
+}
+
+/* history panel */
+.history{
+  width:260px;
+  background: #071025;
+  border-radius:8px;
+  padding:10px;
+  color:var(--button);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.history-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+}
+
+.history-header h3{
+  margin:0;
+  font-size:0.95rem;
+  color:var(--muted);
+  font-weight:600;
+}
+
+.history-controls .btn-clear-history{
+  background:transparent;
+  border:1px solid rgba(255,255,255,0.06);
+  color:var(--muted);
+  padding:6px 8px;
+  border-radius:6px;
+  cursor:pointer;
+  font-size:0.85rem;
+}
+.history-controls .btn-clear-history:hover{
+  color:#fff;
+  border-color:rgba(255,255,255,0.12);
+}
+
+/* list */
+.history-list{
+  list-style:none;
+  margin:0;
+  padding:0;
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  max-height:180px;
+  overflow:auto;
+}
+
+.history-item{
+  background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0));
+  border-radius:6px;
+  padding:8px;
+  cursor:pointer;
+  display:flex;
+  justify-content:space-between;
+  gap:8px;
+  align-items:center;
+  font-size:0.95rem;
+  color:var(--button);
+  border:1px solid rgba(255,255,255,0.02);
+}
+
+.history-item:hover{
+  background:linear-gradient(180deg, rgba(255,255,255,0.04), rgba(0,0,0,0));
+  transform: translateY(-1px);
+}
+
+.history-expression{
+  color:var(--muted);
+  font-size:0.9rem;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  max-width:140px;
+  flex: 1 1 auto;
+}
+
+/* result + delete group on right */
+.history-right{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  flex: 0 0 auto;
+}
+
+.history-result{
+  color:var(--accent);
+  font-weight:700;
+  font-size:0.95rem;
+  margin-left:6px;
+}
+
+/* delete button for each entry */
+.history-delete{
+  background:transparent;
+  border:0;
+  color:rgba(255,255,255,0.55);
+  cursor:pointer;
+  font-size:0.95rem;
+  padding:6px 6px;
+  border-radius:6px;
+  line-height:1;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+}
+.history-delete:hover{
+  color:#fff;
+  background: rgba(255,255,255,0.03);
+}
+
+/* message when empty */
+.history-empty{
+  color:var(--muted);
+  font-size:0.9rem;
+  text-align:center;
+  padding:6px 4px;
+}
+
+/* keys grid */
+.keys{
+  display:grid;
+  grid-template-columns: repeat(4,1fr);
+  gap:10px;
+}
+
+.key{
+  background:linear-gradient(180deg,#fff,#e6e6e6);
+  border:0;
+  border-radius:8px;
+  padding:14px 8px;
+  font-size:1.1rem;
+  cursor:pointer;
+  user-select:none;
+  box-shadow: 0 4px 0 rgba(0,0,0,0.12);
+  transition:transform .07s ease, background .12s;
+}
+
+.key:active{ transform: translateY(2px) }
+
+.key-op{
+  background:linear-gradient(180deg,#ffd89b,#ffb86b);
+  color:#111;
+  font-weight:600;
+}
+
+.key-eq{
+  background:var(--accent);
+  color:#111;
+  font-weight:700;
+}
+
+.key-ac{ background:#ef4444; color:#fff; font-weight:600 }
+.key-del{ background:#6b7280; color:#fff }
+
+@media (max-width:760px){
+  .calculator{ width:100%; padding:14px }
+  .top-row{ flex-direction:column }
+  .history{ width:100% }
+  .display{ width:100% }
+}
+
+@media (max-width:360px){
+  .display{height:48px; font-size:1.1rem}
+  .key{padding:12px}
+}
